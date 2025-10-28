@@ -1,50 +1,73 @@
 import random as rd
 
-list = rd.sample(range(0, 1_000), 10) #Список из рандомных чисел диапазона
-list1 = list                          #Точно такой же список для selection_sort
+list = rd.sample(range(0, 1_000_000), 100) #Список из рандомных чисел диапазона
+list1 = list.copy()                          #Точно такой же список для selection_sort
 
 #////////Bubble_sort////////
 
-#Задаём переменные:
-n = len(list)                         #Длина списка
-count = 0                             #Счётчик сравнений
+#Задаём cчётчик сравнений
+count = 0                             
 
 #Выводим сгенерированный рандомом список
 print(list)
 
 #Задаём цикл для каждого элемента списка
-for i in range(n - 1):                #диапазон задаём (n-1), чтобы сравнивать последующие эл-ты
+for i in range(len(list) - 1):                #диапазон задаём (n-1), чтобы сравнивать последующие эл-ты
 
     #Задаём ещё цикл для сравнения элементов и последующих замен
-    for k in range(0, n - i - 1):
+    for k in range(0, len(list) - i - 1):
 
         #Сравниваем текущий и последующий эл-ты
         if list[k] < list[k+1]:
 
-            
+            #Добавляем счётчик сравнений
             count += 1
-            # Swap if elements are in the wrong order
+
+            #Меняем местами элементы
             new = list[k+1]
             list[k+1] = list[k]
             list[k] = new
-            print(f'Шаг {count}: \n', list)
 
+            #Выводим список на каждом этапе изменения
+            print(f'Шаг {count}: \n', list)
+            
+#Выводим отсортированный список
 print("Отсортированный список:", list, 'Число сравнений: ', count)
 
+#////////Selection_sort////////
 
-n = len(list1)
-count1 = 0
+#Задаём переменные:                   
+count1 = 0                            #Счётчик сравнений
+new1 = 0                              #Переменная-переходник
+
+#Выводим сгенерированный рандомом список
 print(list1)
-for f in range(n-1):
-  min_position = f
-  
-  for j in range(f+1, n):
-     if list1[j] > list1[min_position]:
-       count1 += 1
-       min_position = j
-       min_value = list1.pop(min_position)
-       list1.insert(f, min_value)
-       print(f'Шаг {count1}: \n', list1)
-  
 
+#Задаём цикл для каждого элемента списка
+for z in range(len(list1)):
+    
+    #Записываем индекс самого первого эл-та списка
+    min_position = z
+
+    #Задаём цикл для каждого элемента списка, начиная со второго
+    for j in range(z+1, len(list1)): 
+        
+        #Сравниваем первый элемент списка с остальными
+        if list1[min_position] < list1[j]:
+            
+            #Увеличиваем счётчик сравнений
+            count1 +=1
+
+            #Назначаем следующий элемент первым в списке (обрезаем список)
+            min_position = j
+
+            #Выводим список на каждом этапе изменения
+            print(f'Шаг {count1}: \n', list1)
+    
+    #Меняем местами значения минимального эл-та и текущего эл-та цикла
+    new1 = list1[z]
+    list1[z] = list1[min_position]
+    list1[min_position] = new1
+  
+#Выводим отсортированный список
 print("Отсортированный список:", list1, 'Число сравнений: ', count1)
