@@ -1,6 +1,6 @@
 import random as rd
 
-list = rd.sample(range(0, 1_000_000), 100) #Список из рандомных чисел диапазона
+list = rd.sample(range(0, 1_000_000), 100)   #Список из рандомных чисел диапазона
 list1 = list.copy()                          #Точно такой же список для selection_sort
 
 #////////Bubble_sort////////

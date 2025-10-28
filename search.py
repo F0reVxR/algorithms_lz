@@ -1,23 +1,81 @@
-Array = [5,6,4,2]
-m = 0
-# loop to Traverse through all the elements in the given array
-for i in range(len(Array)):
-      
-    # setting min_indx equal to the first unsorted element
-    
-    min_indx = i
-    # Loop to iterate over un-sorted sub-array
-    for j in range(i+1, len(Array)):
-    
-    #Finding the minimum element in the unsorted sub-array
-        if Array[min_indx] < Array[j]:
-            min_indx = j
-            print(Array)
-    # swapping the minimum element with the element at min_index to place it at its correct position    
-    
-    m = Array[i]
-    Array[i] = Array[min_indx]
-    Array[min_indx] = m
-# Printing the modified array after the selection sort algorithm is applied
+import random as rd
 
-print(Array)
+#Задаём список из рандомных чисел диапазона
+list = rd.sample(range(0, 1_000), 100)
+
+#Сортируем список
+list.sort()
+list1 = list.copy()
+
+#///////////Линейный поиск/////////
+
+#Задаём переменные:
+a = 0          #Счётчик сравнений
+id = int       #Индекс искомого эл-та
+find = int(input("(Линейный поиск) Введите искомый элемент: ")) #Искомое число
+
+#Запускаем цикл для каждого элемента списка
+if find in list:
+    for i in range(0, len(list)):
+    
+        #Сравниваем искомое с каждым эл-том
+        if list[i] == find:
+
+            #Записываем индекс искомого
+            id = i  
+
+            #Выводим результаты поиска
+            print(f"Индекс элемента: {id}")  
+            print(f"Количество сравнений: {a}")  
+            break
+
+        #Увеличиваем счётчик
+        a = a + 1  
+else:
+    print('Такого эл-та нет в списке')
+
+#//////////Бинарный поиск///////////
+print(list1)
+find1 = int(input("(Бинарный поиск) Введите искомый элемент: ")) #Искомое число
+
+#Задаём переменные:
+first_el_id = 0                #Индекс первого эл-та списка
+last_el_id = len(list1) - 1    #Индекс последнего
+count1 = 0                     #Счётчик
+id1 = int                      #Индекс искомого
+
+if find1 in list1:
+
+    #Задаём цикл проверки
+    while (first_el_id <= last_el_id):
+            count1 += 1
+            #Находим индекс серединного эл-та
+            middle = (first_el_id + last_el_id) // 2
+             
+            #Если эл-т - искомый, выводим
+            if find1 == list1[middle]:
+
+                #Записываем индекс найденного
+                id1 = middle
+
+                #Выводим данные:
+                print(f"Индекс элемента: {id1}")  
+                print(f"Количество сравнений: {count1}")  
+
+                break
+            elif find1 < list1[middle]:
+                #Если проверяемый меньше серединного, отбрасываем правую половину
+                last_el_id = middle - 1
+            else:
+                #Если больше, отбрасываем левую
+                first_el_id = middle + 1
+else:
+     print('Такого эл-та нет в списке')
+
+
+
+
+
+    
+    
+
